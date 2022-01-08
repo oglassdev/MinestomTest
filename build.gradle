@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'com.hotslicerrpg'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spongepowered.org/maven' }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.Minestom:Minestom:83ab75d1bf'
+}
+
+test {
+    useJUnitPlatform()
+}
