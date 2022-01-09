@@ -2,8 +2,8 @@ package com.hotslicerrpg.server;
 
 import net.minestom.server.Bootstrap;
 
-public class LaunchServer {
+public class Launch {
     public static void main(String[] arguments) {
-        Bootstrap.bootstrap("com.hotslicerrpg.server.StartServer",arguments);
+        Bootstrap.bootstrap("com.hotslicerrpg.server.Server",arguments);
     }
 }

@@ -33,8 +33,9 @@ public class GamemodeSurvival extends Command {
         var players = ArgumentType.Entity("players").onlyPlayers(true);
 
         addSyntax((sender, context) -> {
-            final EntityFinder entity = context.get(players);
+            final EntityFinder entityFinder = context.get(players);
             if (sender instanceof Player player) {
+
             }
         }, players);
     }

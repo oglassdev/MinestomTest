@@ -2,6 +2,7 @@ package com.hotslicerrpg.server;
 
 import com.hotslicerrpg.server.commands.ChangeWorld;
 import com.hotslicerrpg.server.commands.GamemodeSurvival;
+import com.hotslicerrpg.server.commands.SaveInstances;
 import com.hotslicerrpg.server.commands.StopServer;
 import com.hotslicerrpg.server.worlds.Worlds;
 import net.kyori.adventure.text.Component;
@@ -15,15 +16,14 @@ import net.minestom.server.permission.Permission;
 
 import java.util.Objects;
 
-public class StartServer {
-
+public class Server {
     public static void main(String[] arguments) {
         MinecraftServer server = MinecraftServer.init();
         MinecraftServer.getCommandManager().register(new ChangeWorld());
         MinecraftServer.getCommandManager().register(new GamemodeSurvival());
         MinecraftServer.getCommandManager().register(new StopServer());
+        MinecraftServer.getCommandManager().register(new SaveInstances());
 
-        // Add an event callback to specify the spawning instance (and the spawn position)
         GlobalEventHandler globalEventHandler = MinecraftServer.getGlobalEventHandler();
         globalEventHandler.addListener(PlayerLoginEvent.class, event -> {
             final Player player = event.getPlayer();
@@ -49,5 +49,23 @@ public class StartServer {
             }
         });
         server.start("0.0.0.0",25565);
+    }
+
+    public static void stop(boolean save) {
+        for (Player player : MinecraftServer.getConnectionManager().getOnlinePlayers()) {
+            player.kick("Server stopping");
+        }
+        if (save) {
+            System.out.print("Saving worlds!\n");
+            saveWorlds();
+            System.out.print("Finished saving worlds!\n");
+        }
+        MinecraftServer.stopCleanly();
+    }
+
+    public static void saveWorlds() {
+        for (Worlds world : Worlds.values()) {
+            world.saveWorld();
+        }
     }
 }
