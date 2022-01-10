@@ -24,6 +24,7 @@ public class ChangeWorld extends Command {
                     player.sendMessage(Component.text("You are already here!", NamedTextColor.RED));
                 }
                 else {
+                    world.instanceContainer.getChunkLoader().loadChunk(world.instanceContainer,world.getSpawnLocation().chunkX(),world.getSpawnLocation().chunkZ());
                     player.sendMessage(Component.text("Teleporting you to " + world.name(), NamedTextColor.GRAY));
                     player.setInstance(world.instanceContainer);
                     player.teleport(world.getSpawnLocation());

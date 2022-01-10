@@ -2,15 +2,16 @@ package com.hotslicerrpg.server.commands;
 
 import com.hotslicerrpg.server.Server;
 import net.minestom.server.command.builder.Command;
+import org.slf4j.LoggerFactory;
 
 public class SaveInstances extends Command {
     public SaveInstances() {
         super("saveinstances");
 
         setDefaultExecutor((sender, context) -> {
-            System.out.print("Saving worlds...\n");
+            LoggerFactory.getLogger(Server.class).info("Saving worlds...");
             Server.saveWorlds();
-            System.out.print("Saved worlds!\n");
+            LoggerFactory.getLogger(Server.class).info("Saved worlds!");
         });
     }
 }
