@@ -1,5 +1,6 @@
 package com.hotslicerrpg.server.commands;
 
+import com.hotslicerrpg.server.Files.DefaultConfig;
 import com.hotslicerrpg.server.Server;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -11,9 +12,9 @@ public class StopServer extends Command {
         super("stop");
 
         setDefaultExecutor((sender, context) -> {
-            if (sender.hasPermission("hotslicerrpg.stopserver") || sender instanceof ConsoleSender) {
+            if (sender.hasPermission("hotslicerrpg.admin.stop") || sender instanceof ConsoleSender) {
                 Server.stop(true);
-            } else sender.sendMessage(Component.text("You do not have the permission to run this command!",NamedTextColor.RED));
+            } else sender.sendMessage(DefaultConfig.noPermsWarning());
         });
     }
 }

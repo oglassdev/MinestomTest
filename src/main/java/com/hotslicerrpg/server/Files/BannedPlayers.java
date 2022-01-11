@@ -9,7 +9,6 @@ public class BannedPlayers {
 
     public static void init() {
         file = new YamlFile("banned-players","banned-players.yml");
-        System.out.print("\n" + file.getMap() + "\n");
     }
 
     public static boolean isBanned(Player player) {
