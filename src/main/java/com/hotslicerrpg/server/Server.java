@@ -20,7 +20,9 @@ import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.PlacementRules;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.block.BlockManager;
+import net.minestom.server.instance.block.rule.vanilla.AxisPlacementRule;
 import net.minestom.server.instance.block.rule.vanilla.StairsPlacementRule;
+import net.minestom.server.instance.block.rule.vanilla.WallPlacementRule;
 import net.minestom.server.item.ItemStack;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +45,7 @@ public class Server {
                 blockManager.registerBlockPlacementRule(new StairsPlacementRule(b));
             }
         }
-
+        blockManager.registerBlockPlacementRule(new WallPlacementRule(Block.TORCH));
 
         // Files
         DefaultConfig.init();
