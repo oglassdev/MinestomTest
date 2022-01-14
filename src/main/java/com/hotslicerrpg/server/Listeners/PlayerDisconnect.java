@@ -11,6 +11,7 @@ public class PlayerDisconnect {
         final Player player = event.getPlayer();
         if (!BannedPlayers.isBanned(player)) {
             LoggerFactory.getLogger(Server.class).info(player.getUsername() + " left the game.");
+            Server.savePlayerInventory(player);
         }
     }
 }

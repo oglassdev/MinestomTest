@@ -11,10 +11,12 @@ import java.util.UUID;
 public class PlayerData {
     private static final Map<UUID, Map<String,Object>> map = new HashMap<>();
 
+    Player player;
+
     public PlayerData(Player player) {
+        this.player = player;
         if (!map.containsKey(player.getUuid())) {
             map.put(player.getUuid(), new HashMap<>());
-            map.get(player.getUuid()).put("among us","is sus");
             File file = new File(System.getProperty("user.dir")+"/PlayerData/"+ player.getUuid() + ".yml");
             if (!file.exists()) {
                 try {
@@ -36,5 +38,20 @@ public class PlayerData {
                 }
             }
         }
+    }
+
+    public void put(String string, Object object) {
+        map.get(player.getUuid()).put(string, object);
+    }
+    public Object get(String string) {
+        return map.get(player.getUuid()).getOrDefault(string, null);
+    }
+
+    public void save() {
+        try {
+            Yaml yaml = new Yaml();
+            FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/PlayerData/" + player.getUuid() + ".yml");
+            yaml.dump(map.get(player.getUuid()), writer);
+        } catch (IOException e) { e.printStackTrace(); }
     }
 }
